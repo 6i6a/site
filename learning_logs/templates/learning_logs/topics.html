@@ -1,0 +1,25 @@
+{% extends "learning_logs/base.html" %}
+{%block content%}
+
+  <p> Topics </p>
+
+  <ul>
+    {% for topic in topics %}
+      <li>
+        <a href="{% url 'learning_logs:topic' topic.id%}">{{topic}}</a>
+
+        <form action="{% url 'learning_logs:delete' topic.id%}" method="post">
+          {% csrf_token %}
+          <p>
+            <button name="submit">delete</button>
+            <input type="hidden" name="submit" value="{% url 'learning_logs:topics' %}">
+          </p>
+        </form>
+
+      </li>
+    {% empty %}
+     <li>No topics have been added yet.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'learning_logs:new_topic' %}">Add new topic</a>
+{%endblock content%}

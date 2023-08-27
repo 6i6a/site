@@ -1,0 +1,14 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+{% if form.errors %}
+  Your login or password is not avalible, pls try again
+{% endif %}
+  <form action="{% url 'users:register'%}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button name="submit">register</button>
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" >
+  </form>
+
+{% endblock content %}
